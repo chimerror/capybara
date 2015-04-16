@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Assets;
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using Assets;
+using FluentAssertions;
 
 [TestFixture]
 public class DecksUnitTests
@@ -11,13 +12,12 @@ public class DecksUnitTests
     public void CanCreateDecks()
     {
         Stack<Card> decks = Decks.GetDecks(new Random(13));
-        Assert.AreEqual(Decks.TotalNumberOfCards, decks.Count);
+        decks.Count.Should<int>().Be(Decks.TotalNumberOfCards);
         foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
         {
             foreach (CardRank rank in Enum.GetValues(typeof(CardRank)))
             {
-                Assert.AreEqual(Decks.NumberOfDecks,
-                    decks.Count(c => c.Suit == suit && c.Rank == rank));
+                decks.Count(c => c.Suit == suit && c.Rank == rank).Should<int>().Be(Decks.NumberOfDecks);
             }
         }
     }
