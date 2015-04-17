@@ -20,8 +20,18 @@ namespace Assets
             List<Card> decks = new List<Card>();
             foreach (CardSuit suit in Enum.GetValues(typeof(CardSuit)))
             {
+                if (suit == CardSuit.Unknown)
+                {
+                    continue;
+                }
+
                 foreach (CardRank rank in Enum.GetValues(typeof(CardRank)))
                 {
+                    if (rank == CardRank.Unknown)
+                    {
+                        continue;
+                    }
+
                     for (int currCard = 0; currCard < NumberOfDecks; currCard++)
                     {
                         decks.Add(new Card(rank, suit));

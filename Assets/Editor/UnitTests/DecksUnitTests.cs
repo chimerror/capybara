@@ -17,7 +17,9 @@ public class DecksUnitTests
         {
             foreach (CardRank rank in Enum.GetValues(typeof(CardRank)))
             {
-                decks.Count(c => c.Suit == suit && c.Rank == rank).Should<int>().Be(Decks.NumberOfDecks);
+                int expectedNumber =
+                    suit == CardSuit.Unknown || rank == CardRank.Unknown ? 0 : Decks.NumberOfDecks;
+                decks.Count(c => c.Suit == suit && c.Rank == rank).Should<int>().Be(expectedNumber);
             }
         }
     }

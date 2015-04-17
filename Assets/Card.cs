@@ -10,5 +10,13 @@
             Rank = rank;
             Suit = suit;
         }
+
+        public bool IsValidCard
+        {
+            get
+            {
+                return Rank != CardRank.Unknown && Suit != CardSuit.Unknown;
+            }
+        }
     }
 }
